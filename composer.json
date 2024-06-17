@@ -1,0 +1,83 @@
+{
+  "name": "sukarix/statera",
+  "description": "Statera - Statera is a unit testing kit designed specifically for the Sukarix Framework.",
+  "type": "library",
+  "keywords": [
+    "framework",
+    "sukarix",
+    "php",
+    "fat-free",
+    "testing-tools"
+  ],
+  "license": "MIT",
+  "homepage": "https://sukarix.com",
+  "support": {
+    "issues": "https://github.com/suakrix/statera/issues",
+    "source": "https://github.com/suakrix/statera"
+  },
+  "authors": [
+    {
+      "name": "RIADVICE",
+      "email": "contact@riadvice.tn"
+    },
+    {
+      "name": "Ghazi Triki",
+      "email": "ghazi.triki@riadvice.tn"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Sukarix\\": "src/Sukarix/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": [
+        "src/",
+        "tests/"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.2"
+  },
+  "require-dev": {
+    "ext-xdebug": "*",
+    "friendsofphp/php-cs-fixer": "^v3.54.0",
+    "roave/security-advisories": "dev-latest"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": false,
+    "process-timeout": 600,
+    "preferred-install": "dist",
+    "github-protocols": [
+      "https"
+    ],
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "scripts": {
+    "code-check": "./vendor/bin/phpstan analyse",
+    "csfix": [
+      "sudo phpdismod -s cli xdebug",
+      "./vendor/bin/php-cs-fixer fix --allow-risky yes",
+      "sudo phpenmod -s cli xdebug\n\n"
+    ],
+    "sniffer": "./vendor/bin/phpcs app/src/",
+    "phpcbf": "vendor/bin/phpcbf app/src/",
+    "phpdd": "./vendor/bin/phpdd --target 8.1 app/src/",
+    "phploc": "./vendor/bin/phploc app/src/",
+    "phpinsights": "./vendor/bin/phpinsights",
+    "phpmetrics": "./vendor/bin/phpmetrics --report-html=metrics app/src/",
+    "churn": "./vendor/bin/churn run app/src/",
+    "psalm": "./vendor/bin/psalm --threads=8 --diff"
+  },
+  "suggest": {
+    "ikkez/f3-middleware": "A middleware router plugin for PHP Fat-Free Framework"
+  }
+}

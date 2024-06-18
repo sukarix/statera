@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sukarix;
 
 use ByteUnits\Metric as ByteFormatter;
-use Nette\Utils\Strings;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\Driver\XdebugDriver;
 use SebastianBergmann\CodeCoverage\Filter;
@@ -73,7 +72,7 @@ class Statera
                 continue;
             }
             $object = new $class();
-            CliUtils::instance()->writeSuiteResult($suiteResults = $object->run($f3), Strings::after($class, '\\'));
+            CliUtils::instance()->writeSuiteResult($suiteResults = $object->run($f3), ($pos = strrpos($class, '\\')) !== false ? substr($class, $pos + 1) : null);
             $results = array_merge($results, $suiteResults);
         }
 
@@ -171,7 +170,7 @@ class Statera
             // CliUtils::instance()->writeTestPassed('All tests passed');
             foreach (\Base::instance()->get('SERVER')['argv'] as $arg) {
                 if (str_starts_with($arg, '-o=')) {
-                    \Base::instance()->write(Strings::after($arg, '-o='), $result);
+                    \Base::instance()->write(($pos = strrpos($arg, '-o=')) !== false ? substr($arg, $pos + 1) : null, $result);
                 }
             }
         }

@@ -162,7 +162,7 @@ class Statera
 
     public function afterroute(): void
     {
-        \Base::instance()->set('UI', '../tests/ui/');
+        \Base::instance()->set('UI', realpath(__DIR__ ) . '/../../ui/');
         $result = \Preview::instance()->render('statera.htm');
         if (!$this->cli) {
             echo $result;

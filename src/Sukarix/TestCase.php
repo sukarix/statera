@@ -11,7 +11,7 @@ use Sukarix\Utils\CliUtils;
  *
  * @coversNothing
  */
-final class UnitTest extends \Test
+final class TestCase extends \Test
 {
     /**
      * Text represented group of tests.

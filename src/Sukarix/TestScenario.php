@@ -72,7 +72,7 @@ class TestScenario
         \Base::instance()->set('utest.number', $this->currentTestNumber() + 1);
         $this->resetErrorHandler();
 
-        $test = new UnitTest();
+        $test = new TestCase();
         $test->setGroup($this->group);
 
         return $test;

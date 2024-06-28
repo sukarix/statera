@@ -44,6 +44,7 @@
   "require-dev": {
     "ext-xdebug": "*",
     "friendsofphp/php-cs-fixer": "^v3.54.0",
+    "phpunit/php-code-coverage": "^10.1.14",
     "roave/security-advisories": "dev-latest"
   },
   "minimum-stability": "dev",

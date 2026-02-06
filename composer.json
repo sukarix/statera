@@ -18,11 +18,11 @@
   "authors": [
     {
       "name": "RIADVICE",
-      "email": "contact@riadvice.tn"
+      "email": "contact@riadvice.com"
     },
     {
       "name": "Ghazi Triki",
-      "email": "ghazi.triki@riadvice.tn"
+      "email": "ghazi.triki@riadvice.com"
     }
   ],
   "autoload": {
@@ -43,8 +43,8 @@
   },
   "require-dev": {
     "ext-xdebug": "*",
-    "friendsofphp/php-cs-fixer": "^v3.54.0",
-    "phpunit/php-code-coverage": "^10.1.14",
+    "friendsofphp/php-cs-fixer": "^v3.93.1",
+    "phpunit/php-code-coverage": "^10.1.16",
     "roave/security-advisories": "dev-latest"
   },
   "minimum-stability": "dev",

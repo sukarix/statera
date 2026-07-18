@@ -131,4 +131,35 @@ class TestScenario
     {
         return \Base::instance()->hash(serialize($error));
     }
+
+    /**
+     * @throws \JsonException
+     */
+    protected function compareTemplateToResponse(string $path): bool
+    {
+        $f3 = \Base::instance();
+
+        return empty(array_diff($this->loadResult($path), json_decode($f3->get('RESPONSE'), true) ?? []));
+    }
+
+    protected function postJsonData($array): string
+    {
+        $array['csrf_token'] = \Registry::get('session')->generateToken();
+
+        return json_encode($array);
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    private function loadResult($path)
+    {
+        $string = @file_get_contents('../tests/templates/' . $path);
+
+        if (false === $string) {
+            return [];
+        }
+
+        return json_decode($string, true, 512, \JSON_THROW_ON_ERROR);
+    }
 }

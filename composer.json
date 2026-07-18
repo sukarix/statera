@@ -39,7 +39,8 @@
     }
   },
   "require": {
-    "php": "^8.2"
+    "php": "^8.2",
+    "sukarix/sukarix": "dev-main"
   },
   "require-dev": {
     "ext-xdebug": "*",

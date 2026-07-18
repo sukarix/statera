@@ -2,6 +2,7 @@
   "name": "sukarix/statera",
   "description": "Statera - Statera is a unit testing kit designed specifically for the Sukarix Framework.",
   "type": "library",
+  "version": "0.3.0",
   "keywords": [
     "framework",
     "sukarix",

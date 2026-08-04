@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Sukarix;
 
-use SebastianBergmann\CodeCoverage\CodeCoverage;
-
 class TestScenario
 {
     protected $group = 'Test Scenario';
@@ -17,9 +15,6 @@ class TestScenario
      */
     public function run($f3): array
     {
-        /**
-         * @var CodeCoverage $coverage
-         */
         $class   = new \ReflectionClass($this);
         $methods = $class->getMethods(\ReflectionMethod::IS_PUBLIC);
         $results = [];

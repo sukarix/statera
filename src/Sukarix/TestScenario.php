@@ -137,11 +137,14 @@ class TestScenario
         return empty(array_diff($this->loadResult($path), json_decode($f3->get('RESPONSE'), true) ?? []));
     }
 
+    /**
+     * @throws \JsonException
+     */
     protected function postJsonData($array): string
     {
         $array['csrf_token'] = \Registry::get('session')->generateToken();
 
-        return json_encode($array);
+        return json_encode($array, JSON_THROW_ON_ERROR);
     }
 
     /**

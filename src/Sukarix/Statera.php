@@ -12,6 +12,7 @@ use SebastianBergmann\CodeCoverage\Report\Clover;
 use SebastianBergmann\CodeCoverage\Report\Html\Facade;
 use SebastianBergmann\CodeCoverage\Report\Text;
 use SebastianBergmann\CodeCoverage\Report\Thresholds;
+use SebastianBergmann\FileIterator\Facade as FileIteratorFacade;
 use Sukarix\Utils\CliUtils;
 use Sukarix\Utils\Time;
 
@@ -145,17 +146,18 @@ class Statera
         if (self::isCoverageEnabled()) {
             CliUtils::instance()->write('Generating test coverage [HTML]');
             $publicFolder = \dirname(__DIR__, 3) . \DIRECTORY_SEPARATOR . 'public' . \DIRECTORY_SEPARATOR . 'statera';
+            $report       = self::$coverage->getReport();
             $writer       = new Facade();
-            $writer->process(self::$coverage, $publicFolder . \DIRECTORY_SEPARATOR . 'coverage');
+            $writer->process($report, $publicFolder . \DIRECTORY_SEPARATOR . 'coverage');
 
             CliUtils::instance()->write('Generating test coverage [Clover XML]');
             $writer = new Clover();
-            $writer->process(self::$coverage, $publicFolder . \DIRECTORY_SEPARATOR . 'coverage/clover.xml');
+            $writer->process($report, $publicFolder . \DIRECTORY_SEPARATOR . 'coverage/clover.xml');
 
             if (\PHP_SAPI === 'cli') {
                 CliUtils::instance()->write('Generating test coverage [TEXT]');
                 $writer = new Text(Thresholds::default());
-                CliUtils::instance()->write($writer->process(self::$coverage, true));
+                CliUtils::instance()->write($writer->process($report, true));
             }
         }
     }
@@ -206,7 +208,7 @@ class Statera
             self::$coverageEnabled = \array_key_exists('statera', $_GET) && 'withCoverage' === $_GET['statera'];
             if (self::$coverageEnabled && null === self::$coverage) {
                 $filter = new Filter();
-                $filter->includeDirectory(getcwd() . \DIRECTORY_SEPARATOR . 'src');
+                $filter->includeFiles((new FileIteratorFacade())->getFilesAsArray(getcwd() . \DIRECTORY_SEPARATOR . 'src', '.php'));
                 self::$coverage = new CodeCoverage(new XdebugDriver($filter), $filter);
             }
         }
